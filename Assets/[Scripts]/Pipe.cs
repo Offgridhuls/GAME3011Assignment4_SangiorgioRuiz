@@ -12,6 +12,7 @@ public class Pipe : MonoBehaviour
     public PossibleRotationStruct correctPath;
     public Vector2Int index;
     public LayerMask nodeMask;
+    public bool solved = false;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class Pipe : MonoBehaviour
         if(index == correctPath.correctIndex && transform.eulerAngles.z == correctPath.correctRotation)
         {
             canBeDragged = false;
+            solved = true;
         }
         foreach(Transform node in GridLayout.gridInstance.backgroundNodes)
         {
