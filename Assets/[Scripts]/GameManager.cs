@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public List<Pipe> unsolvedPipes;
     public List<Pipe> solvedPipes;
     public bool isGameWon = false;
+    int pipeAmount;
 
     //public GameObject selectedGameObject;
     private void Awake()
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         {
             unsolvedPipes.Add(pipe.GetComponent<Pipe>());
         }
+        pipeAmount = unsolvedPipes.Count;
     }
 
     // Update is called once per frame
@@ -30,12 +32,16 @@ public class GameManager : MonoBehaviour
     {
         if (isGameWon == false)
         {
-            foreach (Pipe pipe in unsolvedPipes)
+            if (pipeAmount != unsolvedPipes.Count)
             {
-                if (pipe.solved == true)
+                foreach (Pipe pipe in unsolvedPipes)
                 {
-                    unsolvedPipes.Remove(pipe);
-                    solvedPipes.Add(pipe);
+                    if (pipe.solved == true)
+                    {
+                        unsolvedPipes.Remove(pipe);
+                        solvedPipes.Add(pipe);
+                        pipeAmount = unsolvedPipes.Count;
+                    }
                 }
             }
 
