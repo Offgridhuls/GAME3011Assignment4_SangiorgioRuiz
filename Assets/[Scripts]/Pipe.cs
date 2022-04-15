@@ -61,11 +61,12 @@ public class Pipe : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && !solved)
-        {
-            gameManager.unsolvedPipes.Remove(this);
-            gameManager.solvedPipes.Add(this);
-        }
+        
+        //if (Input.GetKeyDown(KeyCode.X) && !solved)
+        //{
+        //    gameManager.unsolvedPipes.Remove(this);
+        //    gameManager.solvedPipes.Add(this);
+        //}
     }
 
     private void OnMouseOver()

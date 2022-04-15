@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
@@ -36,6 +37,13 @@ public class ButtonScript : MonoBehaviour
             timer.timeValue = 90;
         }
 
+        timer.gameStarted = true;
+
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("TestScene");
     }
 
 

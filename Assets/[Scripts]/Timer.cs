@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Timer : MonoBehaviour
@@ -9,29 +10,33 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI timerText;
     public float timeValue = 120;
     public bool gameDone = false;
+    public bool gameStarted = false;
 
     private void Update()
     {
 
 
-
-        if (timeValue > 0)
+        if (gameStarted)
         {
-            timeValue -= Time.deltaTime;
-        }
-        else
-        {
-            timeValue = 0;
-            if (!gameDone)
+            if (timeValue > 0)
             {
-                gameDone = true;
+                timeValue -= Time.deltaTime;
             }
+            else
+            {
+                timeValue = 0;
+                if (!gameDone)
+                {
+                    gameDone = true;
+                    SceneManager.LoadScene("LoseScene");
+                }
+            }
+
+            float minutes = Mathf.FloorToInt(timeValue / 60);
+            float seconds = Mathf.FloorToInt(timeValue % 60);
+
+            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
-
-        float minutes = Mathf.FloorToInt(timeValue / 60);
-        float seconds = Mathf.FloorToInt(timeValue % 60);
-
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
     }
 }
