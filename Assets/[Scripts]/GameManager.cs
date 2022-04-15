@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public List<Pipe> unsolvedPipes;
     public List<Pipe> solvedPipes;
     public bool isGameWon = false;
+    public bool gameStarted = false;
     int pipeAmount;
 
     //public GameObject selectedGameObject;
@@ -16,9 +18,7 @@ public class GameManager : MonoBehaviour
     {
        // selectedGameObject = null;
         gameInstance = this;
-    }
-    void Start()
-    {
+
         GameObject[] tempPipe = GameObject.FindGameObjectsWithTag("Pipe");
         foreach (GameObject pipe in tempPipe)
         {
@@ -26,29 +26,35 @@ public class GameManager : MonoBehaviour
         }
         pipeAmount = unsolvedPipes.Count;
     }
+    void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (isGameWon == false)
         {
-            if (pipeAmount != unsolvedPipes.Count)
-            {
-                foreach (Pipe pipe in unsolvedPipes)
-                {
-                    if (pipe.solved == true)
-                    {
-                        unsolvedPipes.Remove(pipe);
-                        solvedPipes.Add(pipe);
-                        pipeAmount = unsolvedPipes.Count;
-                    }
-                }
-            }
-
             if (unsolvedPipes.Count <= 0)
             {
                 isGameWon = true;
+                print("Game Won!");
+                SceneManager.LoadScene("WinScene");
             }
         }
     }
+
+    //public void CheckPipeAmount()
+    //{
+    //    foreach (Pipe pipe in unsolvedPipes)
+    //    {
+    //        if (pipe.solved == true)
+    //        {
+    //            unsolvedPipes.Remove(pipe);
+    //            solvedPipes.Add(pipe);
+    //            pipeAmount = unsolvedPipes.Count;
+    //        }
+    //    }
+    //}
 }
