@@ -46,5 +46,10 @@ public class ButtonScript : MonoBehaviour
         SceneManager.LoadScene("TestScene");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 
 }
