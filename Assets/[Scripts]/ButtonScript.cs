@@ -26,15 +26,15 @@ public class ButtonScript : MonoBehaviour
 
         if (difficulty == "Easy")
         {
-            timer.timeValue = 300;
+            timer.timeValue = 600;
         }
         else if (difficulty == "Medium")
         {
-            timer.timeValue = 150;
+            timer.timeValue = 480;
         }
         else if (difficulty == "Hard")
         {
-            timer.timeValue = 90;
+            timer.timeValue = 300;
         }
 
         timer.gameStarted = true;
