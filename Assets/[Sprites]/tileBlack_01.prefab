@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6767063807598071695}
   - component: {fileID: 6767063807598071692}
   - component: {fileID: -6058101437415096873}
+  - component: {fileID: 9020314081466894024}
   m_Layer: 3
   m_Name: tileBlack_01
   m_TagString: Untagged
@@ -96,3 +97,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: {x: 0, y: 0}
+  animator: {fileID: 0}
+--- !u!95 &9020314081466894024
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6767063807598071693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5257f7f56fef2046b91f6377856d765, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

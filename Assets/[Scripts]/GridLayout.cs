@@ -11,7 +11,7 @@ public class GridLayout : MonoBehaviour
     public Vector2Int index;
     public BackgroundPiece gridBackground;
 
-    public List<Transform> backgroundNodes = new List<Transform>();
+    public List<BackgroundPiece> backgroundNodes = new List<BackgroundPiece>();
     // Start is called before the first frame update
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class GridLayout : MonoBehaviour
                 var GridBackground = Instantiate(gridBackground, new Vector2(l, w), Quaternion.identity);
                 index = new Vector2Int(l, w);
                 GridBackground.GetComponent<BackgroundPiece>().index = new Vector2Int(l, w);
-                backgroundNodes.Add(GridBackground.transform);
+                backgroundNodes.Add(GridBackground);
             }
         }
     }

@@ -16,12 +16,13 @@ public class Pipe : MonoBehaviour
     public bool solved = false;
     public bool isStraightPipe;
     public GameManager gameManager;
-
+    public GridLayout gridLayout;
     void Start()
     {
         int rand = Random.Range(0, possibleRotations.Length);
         transform.eulerAngles = new Vector3(0, 0, possibleRotations[rand]);
         currentRotation = rand;
+        gridLayout = GameObject.Find("Grid").GetComponent<GridLayout>();
         gameManager = GameObject.Find("EventSystem").GetComponent<GameManager>();
         //targetPosition = correctPath.correctIndex;
         //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, correctPath.correctRotation);
@@ -54,14 +55,14 @@ public class Pipe : MonoBehaviour
                     gameManager.solvedPipes.Add(this);
                 }
             }
-            foreach (Transform node in GridLayout.gridInstance.backgroundNodes)
+            foreach (BackgroundPiece node in GridLayout.gridInstance.backgroundNodes)
             {
-                if (Vector3.Distance(node.position, targetPosition) < smallestDistance && isBeingDragged)
+                if (Vector3.Distance(node.transform.position, targetPosition) < smallestDistance && isBeingDragged)
                 {
 
                     index = node.GetComponent<BackgroundPiece>().index;
-                    targetPosition = node.position;
-                    smallestDistance = Vector3.Distance(node.position, targetPosition);
+                    targetPosition = node.transform.position;
+                    smallestDistance = Vector3.Distance(node.transform.position, targetPosition);
                 }
             }
         }
@@ -112,11 +113,23 @@ public class Pipe : MonoBehaviour
     private void OnMouseDrag()
     {
         if(isBeingDragged && canBeDragged != false)
+        foreach(BackgroundPiece b in gridLayout.backgroundNodes)
+            {
+                if(b.index == correctPath.correctIndex)
+                {
+                    b.animator.SetBool("isBeingHovered", true);
+                }
+            }
         targetPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
     }
 
     private void OnMouseExit()
     {
+
+        foreach (BackgroundPiece b in gridLayout.backgroundNodes)
+        {
+           b.animator.SetBool("isBeingHovered", false);
+        }
         isBeingDragged = false;
     }
 
