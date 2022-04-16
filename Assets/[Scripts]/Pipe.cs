@@ -32,41 +32,48 @@ public class Pipe : MonoBehaviour
     {
         transform.position = targetPosition;
         float smallestDistance = snapDistance;
-        if (isStraightPipe)
+        if (!solved)
         {
-            if (index == correctPath.correctIndex && (transform.eulerAngles.z == correctPath.correctRotation || transform.eulerAngles.z == correctPath.correctRotation + 180))
+            if (isStraightPipe)
             {
-                canBeDragged = false;
-                solved = true;
+                if (index == correctPath.correctIndex && (transform.eulerAngles.z == correctPath.correctRotation || transform.eulerAngles.z == correctPath.correctRotation + 180))
+                {
+                    canBeDragged = false;
+                    solved = true;
+                    gameManager.unsolvedPipes.Remove(this);
+                    gameManager.solvedPipes.Add(this);
+                }
             }
-        }
-        else
-        {
-            if (index == correctPath.correctIndex && (transform.eulerAngles.z == correctPath.correctRotation) && !solved)
+            else
             {
-                canBeDragged = false;
-                solved = true;
-                gameManager.unsolvedPipes.Remove(this);
-                gameManager.solvedPipes.Add(this);
+                if (index == correctPath.correctIndex && (transform.eulerAngles.z == correctPath.correctRotation) && !solved)
+                {
+                    canBeDragged = false;
+                    solved = true;
+                    gameManager.unsolvedPipes.Remove(this);
+                    gameManager.solvedPipes.Add(this);
+                }
             }
-        }
-        foreach(Transform node in GridLayout.gridInstance.backgroundNodes)
-        {
-            if (Vector3.Distance(node.position, targetPosition) < smallestDistance && isBeingDragged)
+            foreach (Transform node in GridLayout.gridInstance.backgroundNodes)
             {
+                if (Vector3.Distance(node.position, targetPosition) < smallestDistance && isBeingDragged)
+                {
 
-                index = node.GetComponent<BackgroundPiece>().index;
-                targetPosition = node.position;
-                smallestDistance = Vector3.Distance(node.position, targetPosition);
+                    index = node.GetComponent<BackgroundPiece>().index;
+                    targetPosition = node.position;
+                    smallestDistance = Vector3.Distance(node.position, targetPosition);
+                }
             }
         }
 
         
-        //if (Input.GetKeyDown(KeyCode.X) && !solved)
-        //{
-        //    gameManager.unsolvedPipes.Remove(this);
-        //    gameManager.solvedPipes.Add(this);
-        //}
+       // if (Input.GetKeyDown(KeyCode.X) && !solved)
+       // {
+       //     //gameManager.unsolvedPipes.Remove(this);
+       //     //gameManager.solvedPipes.Add(this);
+       //     targetPosition = correctPath.correctIndex;
+       //     transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, correctPath.correctRotation);
+       // }
     }
 
     private void OnMouseOver()
